@@ -95,7 +95,7 @@ Resources:
     Type: 'AWS::S3::BucketPolicy'
   ArtifactBucket:
     Type: 'AWS::S3::Bucket'
-    DeletionPolicy: Delete
+    DeletionPolicy: Retain
     Properties:
       AccessControl: Private
   CodeBuildRole:
@@ -213,7 +213,7 @@ Resources:
             Effect: Allow
       Roles:
         - !Ref CodePipelineRole
-  CodePipeline:
+  CodePipelineProd:
     Type: 'AWS::CodePipeline::Pipeline'
     Properties:
       RoleArn: !GetAtt 
@@ -236,6 +236,33 @@ Resources:
                 Branch: !Ref GitHubProdBranch
                 OAuthToken: !Ref GitHubOAuthToken
               RunOrder: 1
+        - Name: Build
+          Actions:
+            - Name: CodeBuildProd
+              InputArtifacts:
+                - Name: StaticSiteSourceProd
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: '1'
+                Provider: CodeBuild
+              OutputArtifacts:
+                - Name: StaticSiteProd
+              Configuration:
+                ProjectName: !Ref CodeBuildProd
+              RunOrder: 1
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactBucket
+  CodePipelineStaging:
+    Type: 'AWS::CodePipeline::Pipeline'
+    Properties:
+      RoleArn: !GetAtt 
+        - CodePipelineRole
+        - Arn
+      Stages:
+        - Name: Source
+          Actions:
             - Name: SourceActionStaging
               ActionTypeId:
                 Category: Source
@@ -252,19 +279,6 @@ Resources:
               RunOrder: 1
         - Name: Build
           Actions:
-            - Name: CodeBuildProd
-              InputArtifacts:
-                - Name: StaticSiteSourceProd
-              ActionTypeId:
-                Category: Build
-                Owner: AWS
-                Version: '1'
-                Provider: CodeBuild
-              OutputArtifacts:
-                - Name: StaticSiteProd
-              Configuration:
-                ProjectName: !Ref CodeBuildProd
-              RunOrder: 1
             - Name: CodeBuildStaging
               InputArtifacts:
                 - Name: StaticSiteSourceStaging
