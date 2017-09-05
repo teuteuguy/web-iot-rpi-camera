@@ -1,0 +1,23 @@
+(function() {
+    'use strict';
+
+    angular.module('config', [])
+
+        .constant('settings', {
+            pageTitle: 'My Web IoT RPI Camera website'
+        })
+
+        .constant('configCognito', {
+            region: 'AWS Cognito Region',
+            endpoint: 'AWS Cognito Endpoint'
+        })
+
+        .constant('configIoT', {
+            endpoint: 'AWS IoT Endpoint',
+            region: 'AWS IoT Region',
+            thingName: 'AWS IoT Thingname'
+        })
+
+    ;
+
+})();

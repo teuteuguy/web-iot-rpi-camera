@@ -1,0 +1,22 @@
+<div ng-controller="HomeController">
+    <div id="header" class="jumbotron" style="margin-bottom: 10px;">
+        <table width=100%>
+            <tr>
+                <td>
+                    <h3 style="padding: 0px; margin: 10px;">{{pageTitle}}</h3>
+                    <h5 style="padding: 0px; margin-left: 10px;"><connection-status></connection-status> | <thing-info></thing-info></h5>
+                </td>
+                <td style="text-align: right;">
+                    <button class="btn btn-default" type="button" ng-click="snap()"><i class="fa fa-camera" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="container-fluid text-center" style="padding-left: 0px; padding-right: 0px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <my-image image=""></my-image>
+            </div>
+        </div>
+    </div>
+</div>

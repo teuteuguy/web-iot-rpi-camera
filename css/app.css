@@ -1,0 +1,31 @@
+body {
+    /*min-height: 2000px;*/
+    padding-top: 20px;
+    font-family: "Open Sans", "Lucida Grande", "Helvetica Neue", Arial;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+.navbar-default {
+    background-color: #444444;
+    color: #eeeeee;
+}
+
+.brand {
+    margin-left: -15px;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#header {
+    padding: 0px 40px;
+    background-color: #444444;
+    color: #eeeeee;
+}
+
+.thumbnail-hover:hover {
+    background-color: black;
+}
