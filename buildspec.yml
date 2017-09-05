@@ -19,6 +19,6 @@ phases:
   post_build:
     commands:
       - echo This is the bucket that will be used ${BUCKET_NAME}
-      - aws s3 sync --delete . "s3://${BUCKET_NAME}"
+      - aws s3 sync --delete --exclude js/config.js . "s3://${BUCKET_NAME}"
       # - aws s3 sync --delete --exclude assets/* build/ "s3://${BUCKET_NAME}"
       # - aws s3 sync --delete --cache-control "max-age=31536000" build/assets "s3://${BUCKET_NAME}/assets"
